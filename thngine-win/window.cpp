@@ -1,4 +1,5 @@
 #include "window.h"
+#include "input.h"
 
 namespace Thngine
 {
@@ -14,6 +15,12 @@ namespace Thngine
 		{
 			switch (umsg)
 			{
+			case WM_KEYDOWN:
+				Thngine::Input::SetKeyDown(wparam, true);
+				break;
+			case WM_KEYUP:
+				Thngine::Input::SetKeyDown(wparam, false);
+				break;
 			case WM_CLOSE:
 				DestroyWindow(hwnd);
 				break;
@@ -24,7 +31,7 @@ namespace Thngine
 			return DefWindowProc(hwnd, umsg, wparam, lparam);
 		}
 
-		HRESULT InitMainWindow()
+		HRESULT Init()
 		{
 			HRESULT result;
 

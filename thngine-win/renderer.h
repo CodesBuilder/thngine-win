@@ -5,6 +5,8 @@
 #include <d2d1.h>
 #include <d2d1_1.h>
 #include <dxgi1_2.h>
+#include <dwrite_1.h>
+#include <wincodec.h>
 
 using namespace Microsoft::WRL;
 
@@ -31,7 +33,10 @@ namespace Thngine
 		extern ComPtr<ID2D1DeviceContext> d2dDeviceContext;
 		extern ComPtr<ID2D1Bitmap1> d2dTargetBitmap;
 
-		HRESULT InitRenderer();
+		extern ComPtr<IDWriteFactory> dwriteFactory;
+		extern ComPtr<IWICImagingFactory> wicImagingFactory;
+
+		HRESULT Init();
 		void OnResize();
 
 		void Predraw();

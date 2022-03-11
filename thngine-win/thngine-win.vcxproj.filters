@@ -24,6 +24,9 @@
     <ClInclude Include="renderer.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="task.cpp">
@@ -39,6 +42,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="renderer_2d.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "task.h"
 #include "window.h"
 #include "renderer.h"
+#include "input.h"
 #include <Windows.h>
 
 void WINAPI MainThreadCallback(LPVOID param)
@@ -23,18 +24,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	Thngine::Window::MainWindowInstance = hInstance;
 	
-	if (FAILED(result=Thngine::Window::InitMainWindow()))
+	if (FAILED(result=Thngine::Window::Init()))
 	{
 		MessageBox(NULL, L"Unable to initialize main window", L"Error", MB_ICONERROR);
 		return result;
 	}
 
-	if (FAILED(result=Thngine::Renderer::InitRenderer()))
+	if (FAILED(result=Thngine::Renderer::Init()))
 	{
 		MessageBox(NULL, L"Unable to initialize renderer", L"Error", MB_ICONERROR);
 		return result;
 	}
 
+	Thngine::Input::Reset();
 	Thngine::Task::Init();
 
 	Thngine::Task::CreateTask(MainThreadCallback);

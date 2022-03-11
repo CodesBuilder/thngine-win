@@ -21,6 +21,41 @@ namespace Thngine
 			return brush;
 		}
 
+		ID2D1Bitmap* Load2DBitmap(LPCWSTR path)
+		{
+			ComPtr<IWICBitmapDecoder> bitmapDecoder;
+			ComPtr<IWICBitmapFrameDecode> bitmapFrameDecode;
+			ComPtr<IWICFormatConverter> formatConverter;
+			ID2D1Bitmap1* bitmap;
+
+			if (FAILED(wicImagingFactory->CreateDecoderFromFilename(
+				path,
+				NULL,
+				GENERIC_READ,
+				WICDecodeMetadataCacheOnDemand,
+				&bitmapDecoder)))
+				return NULL;
+
+			bitmapDecoder->GetFrame(0, &bitmapFrameDecode);
+
+			if (FAILED(wicImagingFactory->CreateFormatConverter(&formatConverter)))
+				return NULL;
+
+			if (FAILED(formatConverter->Initialize(
+				bitmapFrameDecode.Get(),
+				GUID_WICPixelFormat32bppBGRA,
+				WICBitmapDitherTypeNone,
+				NULL,
+				0.0,
+				WICBitmapPaletteTypeCustom)))
+				return NULL;
+
+			if (FAILED(d2dDeviceContext->CreateBitmapFromWicBitmap(formatConverter.Get(), &bitmap)))
+				return NULL;
+
+			return bitmap;
+		}
+
 		/// <summary>
 		/// Draw a rectangle with solid color.
 		/// </summary>

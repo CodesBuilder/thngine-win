@@ -10,7 +10,7 @@ namespace Thngine
 		extern HINSTANCE MainWindowInstance;
 
 		LRESULT CALLBACK MainWindowCallback(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
-		HRESULT InitMainWindow();
+		HRESULT Init();
 		int GetMainWindowWidth();
 		int GetMainWindowHeight();
 	}
