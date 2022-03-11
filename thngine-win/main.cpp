@@ -3,13 +3,11 @@
 #include "renderer.h"
 #include <Windows.h>
 
-void MainThreadCallback()
+void WINAPI MainThreadCallback(LPVOID param)
 {
-	ComPtr<ID2D1SolidColorBrush> brush;
-	brush = Thngine::Renderer::CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Red));
 	while (true)
 	{
-		Thngine::Renderer::DrawRectangle(300, 300, 100, 100, brush.Get());
+		Thngine::Renderer::DrawRectangle(300, 300, 100, 100, D2D1::ColorF(D2D1::ColorF::Red));
 		Thngine::Task::Wait(1);
 	}
 }
@@ -37,6 +35,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return result;
 	}
 
+	Thngine::Task::Init();
+
 	Thngine::Task::CreateTask(MainThreadCallback);
 
 	MSG msg;
@@ -60,6 +60,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	Thngine::Renderer::Deinit();
+	Thngine::Task::Deinit();
 
 	return 0;
 }

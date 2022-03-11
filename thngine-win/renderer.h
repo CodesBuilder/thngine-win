@@ -39,7 +39,6 @@ namespace Thngine
 
 		void Deinit();
 
-		void DrawRectangle(int x, int y, int width, int height, ID2D1Brush* brush);
-		ID2D1SolidColorBrush* CreateSolidColorBrush(D2D1_COLOR_F color);
+		void DrawRectangle(int x, int y, int width, int height, D2D1_COLOR_F);
 	}
 }

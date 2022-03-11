@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 
 enum TaskStates
 {
@@ -12,10 +13,13 @@ namespace Thngine
 	namespace Task
 	{
 		typedef unsigned int TaskHandle;
-		typedef void (*TaskCallback)();
+		typedef LPFIBER_START_ROUTINE TaskCallback;
 		class TaskThread;
 
 		TaskHandle CreateTask(TaskCallback callback);
+
+		void Init();
+		void Deinit();
 
 		void Tick();
 
